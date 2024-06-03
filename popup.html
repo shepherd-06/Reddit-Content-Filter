@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Reddit Content Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0f7fa;
+            border: 1px solid #00acc1;
+            border-radius: 3px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Reddit Content Filter</h1>
+    <p>This extension automatically removes specific content from Reddit pages.</p>
+    <div class="status" id="status">Checking status...</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const statusElement = document.getElementById('status');
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                const activeTab = tabs[0];
+                if (activeTab.url.includes('reddit.com')) {
+                    statusElement.textContent = 'Extension is active on this Reddit page.';
+                    statusElement.style.backgroundColor = '#e0f7fa';
+                    statusElement.style.borderColor = '#00acc1';
+                } else {
+                    statusElement.textContent = 'Extension is not active on this site.';
+                    statusElement.style.backgroundColor = '#ffebee';
+                    statusElement.style.borderColor = '#d32f2f';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
